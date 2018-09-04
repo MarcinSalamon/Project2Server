@@ -14,11 +14,13 @@ public class UserService {
 
 	@Autowired
 	UserRepo userRepo;
-
+	
+	@Autowired
+	UserService service;
+	
 	public User getUser(int userId) {
 		User u = userRepo.findOne(userId);
 		u.setHash("");
-		u.setSalt("");
 		return u;
 	}
 
@@ -35,14 +37,22 @@ public class UserService {
 		List<User> users = this.retrieveAllUsers();
 		for (User user : users) {
 			if (user.getUsername().equals(info.getUsername()) && this.hash(info.getPassword()).equals(user.getHash())) {
+				System.out.println(user);
+				user.setHash("");
 				return user;
 			}
 		}
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param password
+	 * @return
+	 */
 	private String hash(String password) {
-		
-		return null;
+		String hashed = new HashingService().hashPassword(password);
+		System.out.println(hashed);
+		return hashed;
 	}
 }
