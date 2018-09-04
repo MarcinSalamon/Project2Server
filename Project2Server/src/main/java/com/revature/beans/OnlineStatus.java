@@ -14,4 +14,27 @@ public class OnlineStatus {
 	
 	@Column(name="STATUS")
 	private String status;
+
+	public OnlineStatus() {
+		super();
+	}
+
+	public int getStatuId() {
+		return statuId;
+	}
+
+	public void setStatuId(int statuId) {
+		this.statuId = statuId;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	
+	
 }

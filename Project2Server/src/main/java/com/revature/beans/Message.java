@@ -19,7 +19,6 @@ public class Message {
 	private int mId;
 	
 	@Column(name="U_ID")
-	@OneToOne(mappedBy="uId")
 	private int messageUserId;
 	
 	@Column(name="TIMESTAMP")
@@ -29,6 +28,52 @@ public class Message {
 	private String message;
 	
 	@Column(name="CONVERSATION_ID")
-	@ManyToOne
 	private int conversationId;
+
+	public int getmId() {
+		return mId;
+	}
+
+	public void setmId(int mId) {
+		this.mId = mId;
+	}
+
+	public int getMessageUserId() {
+		return messageUserId;
+	}
+
+	public void setMessageUserId(int messageUserId) {
+		this.messageUserId = messageUserId;
+	}
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public int getConversationId() {
+		return conversationId;
+	}
+
+	public void setConversationId(int conversationId) {
+		this.conversationId = conversationId;
+	}
+
+	public Message() {
+		super();
+	}
+	
+	
+	
 }

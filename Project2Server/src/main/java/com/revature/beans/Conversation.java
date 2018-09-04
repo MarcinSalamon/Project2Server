@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,10 +16,37 @@ public class Conversation {
 	private int cId;
 	
 	@Column(name="U_ID_1")
-	@OneToOne(mappedBy="uId")
 	private int uId1;
 	
 	@Column(name="U_ID_2")
-	@OneToOne(mappedBy="uId")
 	private int uId2;
+
+	public Conversation() {
+		super();
+	}
+
+	public int getcId() {
+		return cId;
+	}
+
+	public void setcId(int cId) {
+		this.cId = cId;
+	}
+
+	public int getuId1() {
+		return uId1;
+	}
+
+	public void setuId1(int uId1) {
+		this.uId1 = uId1;
+	}
+
+	public int getuId2() {
+		return uId2;
+	}
+
+	public void setuId2(int uId2) {
+		this.uId2 = uId2;
+	}
+	
 }
