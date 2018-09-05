@@ -1,7 +1,5 @@
 package com.revature;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,11 +43,17 @@ public class MainController {
 	 * @return user if username and password are correct
 	 */
 	@PostMapping("/login")
-	public ResponseEntity<Object> login(@RequestBody LoginInfo info, HttpServletResponse response) {
+	public ResponseEntity<Object> login(@RequestBody LoginInfo info) {
 		User validated = userService.validateUser(info);
 		if(validated == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
 		}
 		return ResponseEntity.ok(validated);
+	}
+	
+	@PostMapping("/register")
+	public ResponseEntity<Object> register(@RequestBody User registrationInfo){
+		userService.createUser(registrationInfo);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 	}
 }

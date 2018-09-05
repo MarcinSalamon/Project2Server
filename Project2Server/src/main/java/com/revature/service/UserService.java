@@ -27,8 +27,15 @@ public class UserService {
 	public List<User> retrieveAllUsers() {
 		return (List<User>) userRepo.findAll();
 	}
-
+	
+	/**
+	 * hashed the password and inserts user into the database
+	 * 
+	 * @param user
+	 * @return
+	 */
 	public User createUser(User user) {
+		user.setPassword(this.hash(user.getPassword()));
 		userRepo.save(user);
 		return user;
 	}
@@ -47,7 +54,7 @@ public class UserService {
 	/**
 	 * 
 	 * @param password
-	 * @return
+	 * @return hashed password
 	 */
 	private String hash(String password) {
 		String hashed = new HashingService().hashPassword(password);
