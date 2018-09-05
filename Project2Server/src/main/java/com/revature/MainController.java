@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.beans.Conversation;
 import com.revature.beans.LoginInfo;
+import com.revature.beans.Message;
 import com.revature.beans.User;
+import com.revature.service.MessageService;
 import com.revature.service.UserService;
 
 @RestController
@@ -20,6 +23,12 @@ public class MainController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	MessageService messageService;
+	
+	@Autowired
+	
 	
 	/**
 	 * 
@@ -54,6 +63,17 @@ public class MainController {
 	@PostMapping("/register")
 	public ResponseEntity<Object> register(@RequestBody User registrationInfo){
 		userService.createUser(registrationInfo);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+	}
+	
+	@PostMapping("/conversation/{id}/message")
+	public ResponseEntity<Object> newMessage(@RequestBody Message message){
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(message);
+	}
+	
+	@PostMapping("/conversation")
+	public ResponseEntity<Object> newConversation(@RequestBody Conversation conversation){
+		conversationService
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 	}
 }

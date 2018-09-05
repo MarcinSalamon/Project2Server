@@ -14,10 +14,7 @@ public class UserService {
 
 	@Autowired
 	UserRepo userRepo;
-	
-	@Autowired
-	UserService service;
-	
+		
 	public User getUser(int userId) {
 		User u = userRepo.findOne(userId);
 		u.setPassword("");
