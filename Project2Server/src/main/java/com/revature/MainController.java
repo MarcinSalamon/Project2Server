@@ -15,6 +15,7 @@ import com.revature.beans.Conversation;
 import com.revature.beans.LoginInfo;
 import com.revature.beans.Message;
 import com.revature.beans.User;
+import com.revature.service.ConversationService;
 import com.revature.service.MessageService;
 import com.revature.service.UserService;
 
@@ -28,7 +29,7 @@ public class MainController {
 	MessageService messageService;
 	
 	@Autowired
-	
+	ConversationService conversationService;
 	
 	/**
 	 * 
@@ -73,7 +74,7 @@ public class MainController {
 	
 	@PostMapping("/conversation")
 	public ResponseEntity<Object> newConversation(@RequestBody Conversation conversation){
-		conversationService
+		conversationService.createConversation(conversation);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 	}
 }
