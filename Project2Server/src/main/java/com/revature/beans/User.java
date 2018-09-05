@@ -26,9 +26,6 @@ public class User {
 	@Column(name="PW_HASH")
 	private String hash;
 	
-	@Column(name="PW_SALT")
-	private String salt;
-	
 	@Column(name="EMAIL")
 	private String email;
 	
@@ -77,14 +74,6 @@ public class User {
 		this.hash = hash;
 	}
 
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -119,8 +108,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [uId=" + uId + ", fname=" + fname + ", lname=" + lname + ", hash=" + hash + ", salt=" + salt
-				+ ", email=" + email + ", username=" + username + ", friendsListId=" + friendsListId + ", onlineStatus="
-				+ onlineStatus + "]";
+		return "User [uId=" + uId + ", fname=" + fname + ", lname=" + lname + ", hash=" + hash + ", email=" + email
+				+ ", username=" + username + ", friendsListId=" + friendsListId + ", onlineStatus=" + onlineStatus
+				+ "]";
 	}
 }
