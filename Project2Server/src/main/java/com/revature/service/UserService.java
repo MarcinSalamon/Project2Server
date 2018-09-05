@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,9 @@ public class UserService {
 	@Autowired
 	UserRepo userRepo;
 		
-	public User getUser(int userId) {
-		User u = userRepo.findOne(userId);
-		u.setPassword("");
+	public Optional<User> getUser(int userId) {
+		Optional<User> u = userRepo.findById(userId);
+//		u.setPassword("");
 		return u;
 	}
 

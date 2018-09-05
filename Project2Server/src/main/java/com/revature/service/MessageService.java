@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,15 +12,15 @@ import com.revature.repository.MessageRepo;
 public class MessageService {
 
 	@Autowired
-	MessageRepo messageService;
+	MessageRepo messageRepo;
 	
-	public Message getMessage(int mId) {
-		Message m = messageService.findOne(mId);
+	public Optional<Message> getMessage(int mId) {
+		Optional<Message> m = messageRepo.findById(mId);
 		return m;
 	}
 	
 	public Message createMessage(Message m){
-		messageService.save(m);
+		messageRepo.save(m);
 		return m;
 	}
 }

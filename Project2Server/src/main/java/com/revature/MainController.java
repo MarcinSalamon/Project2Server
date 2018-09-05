@@ -1,5 +1,7 @@
 package com.revature;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +43,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/user/{id}")
-	public User getUser(@PathVariable int id) {
+	public Optional<User> getUser(@PathVariable int id) {
 		return userService.getUser(id);
 	}
 	
@@ -68,8 +70,11 @@ public class MainController {
 	}
 	
 	@PostMapping("/conversations/{id}/message")
-	public ResponseEntity<Object> newMessage(@RequestBody Message message){
-		message.setConversationId(2);
+	public ResponseEntity<Object> newMessage(@PathVariable int id, @RequestBody Message message){
+		if(message.getConversationId() != id) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+		}
+		messageService.createMessage(message);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(message);
 	}
 	
