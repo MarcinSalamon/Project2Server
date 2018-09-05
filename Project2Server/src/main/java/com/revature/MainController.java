@@ -1,6 +1,10 @@
 package com.revature;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,12 +38,18 @@ public class MainController {
 	}
 	
 	/**
+	 * local endpoint
+	 * http://localhost:8080/api/v1/login
 	 * 
 	 * @param info is json with login and password fields
 	 * @return user if username and password are correct
 	 */
 	@PostMapping("/login")
-	public User login(@RequestBody LoginInfo info) {
-		return userService.validateUser(info);
+	public ResponseEntity<Object> login(@RequestBody LoginInfo info, HttpServletResponse response) {
+		User validated = userService.validateUser(info);
+		if(validated == null) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+		}
+		return ResponseEntity.ok(validated);
 	}
 }
