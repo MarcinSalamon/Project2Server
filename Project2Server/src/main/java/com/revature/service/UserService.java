@@ -20,7 +20,7 @@ public class UserService {
 	
 	public User getUser(int userId) {
 		User u = userRepo.findOne(userId);
-		u.setHash("");
+		u.setPassword("");
 		return u;
 	}
 
@@ -36,9 +36,8 @@ public class UserService {
 	public User validateUser(LoginInfo info) {
 		List<User> users = this.retrieveAllUsers();
 		for (User user : users) {
-			if (user.getUsername().equals(info.getUsername()) && this.hash(info.getPassword()).equals(user.getHash())) {
-				System.out.println(user);
-				user.setHash("");
+			if (user.getUsername().equals(info.getUsername()) && this.hash(info.getPassword()).equals(user.getPassword())) {
+				user.setPassword("");
 				return user;
 			}
 		}
@@ -52,7 +51,6 @@ public class UserService {
 	 */
 	private String hash(String password) {
 		String hashed = new HashingService().hashPassword(password);
-		System.out.println(hashed);
 		return hashed;
 	}
 }

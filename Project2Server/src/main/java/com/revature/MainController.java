@@ -19,6 +19,10 @@ public class MainController {
 	@Autowired
 	UserService userService;
 	
+	/**
+	 * 
+	 * @return documentation
+	 */
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index() {
 		return "<html><body><h1>index</h1></body></html>";
@@ -29,6 +33,11 @@ public class MainController {
 		return userService.getUser(id);
 	}
 	
+	/**
+	 * 
+	 * @param info is json with login and password fields
+	 * @return user if username and password are correct
+	 */
 	@PostMapping("/login")
 	public User login(@RequestBody LoginInfo info) {
 		return userService.validateUser(info);
