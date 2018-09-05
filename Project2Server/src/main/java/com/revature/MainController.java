@@ -67,12 +67,13 @@ public class MainController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 	}
 	
-	@PostMapping("/conversation/{id}/message")
+	@PostMapping("/conversations/{id}/message")
 	public ResponseEntity<Object> newMessage(@RequestBody Message message){
+		message.setConversationId(2);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(message);
 	}
 	
-	@PostMapping("/conversation")
+	@PostMapping("/conversations")
 	public ResponseEntity<Object> newConversation(@RequestBody Conversation conversation){
 		conversationService.createConversation(conversation);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
