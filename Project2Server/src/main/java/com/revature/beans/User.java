@@ -24,16 +24,13 @@ public class User {
 	private String lname;
 	
 	@Column(name="PW_HASH")
-	private String hash;
+	private String password;
 	
 	@Column(name="EMAIL")
 	private String email;
 	
 	@Column(name="USERNAME")
 	private String username;
-	
-	@Column(name="F_LIST_ID")
-	private int friendsListId;
 	
 	@Column(name="ONLINE_STATUS")
 	private int onlineStatus;
@@ -66,12 +63,12 @@ public class User {
 		this.lname = lname;
 	}
 
-	public String getHash() {
-		return hash;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setHash(String hash) {
-		this.hash = hash;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -90,14 +87,6 @@ public class User {
 		this.username = username;
 	}
 
-	public int getFriendsListId() {
-		return friendsListId;
-	}
-
-	public void setFriendsListId(int friendsListId) {
-		this.friendsListId = friendsListId;
-	}
-
 	public int getOnlineStatus() {
 		return onlineStatus;
 	}
@@ -108,8 +97,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [uId=" + uId + ", fname=" + fname + ", lname=" + lname + ", hash=" + hash + ", email=" + email
-				+ ", username=" + username + ", friendsListId=" + friendsListId + ", onlineStatus=" + onlineStatus
-				+ "]";
+		return "User [uId=" + uId + ", fname=" + fname + ", lname=" + lname + ", password=" + password + ", email=" + email
+				+ ", username=" + username + ", onlineStatus=" + onlineStatus + "]";
 	}
 }
