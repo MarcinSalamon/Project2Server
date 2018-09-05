@@ -29,6 +29,7 @@ public class UserService {
 	}
 
 	public User createUser(User user) {
+		user.setPassword(this.hash(user.getPassword()));
 		userRepo.save(user);
 		return user;
 	}
@@ -47,7 +48,7 @@ public class UserService {
 	/**
 	 * 
 	 * @param password
-	 * @return
+	 * @return hashed password
 	 */
 	private String hash(String password) {
 		String hashed = new HashingService().hashPassword(password);
