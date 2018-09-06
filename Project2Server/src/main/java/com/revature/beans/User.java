@@ -5,15 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="USERS")
 public class User {
 	@Id
-	@SequenceGenerator(name = "USERS_SEQ", sequenceName = "USERS_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_SEQ")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="U_ID")
 	private int uId;
 	
@@ -24,13 +24,19 @@ public class User {
 	private String lname;
 	
 	@Column(name="PW_HASH")
-	private String password;
+	private String hash;
+	
+	@Column(name="PW_SALT")
+	private String salt;
 	
 	@Column(name="EMAIL")
 	private String email;
 	
 	@Column(name="USERNAME")
 	private String username;
+	
+	@Column(name="F_LIST_ID")
+	private int friendsListId;
 	
 	@Column(name="ONLINE_STATUS")
 	private int onlineStatus;
@@ -63,12 +69,20 @@ public class User {
 		this.lname = lname;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getHash() {
+		return hash;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	public String getEmail() {
@@ -87,6 +101,14 @@ public class User {
 		this.username = username;
 	}
 
+	public int getFriendsListId() {
+		return friendsListId;
+	}
+
+	public void setFriendsListId(int friendsListId) {
+		this.friendsListId = friendsListId;
+	}
+
 	public int getOnlineStatus() {
 		return onlineStatus;
 	}
@@ -97,7 +119,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [uId=" + uId + ", fname=" + fname + ", lname=" + lname + ", password=" + password + ", email=" + email
-				+ ", username=" + username + ", onlineStatus=" + onlineStatus + "]";
+		return "User [uId=" + uId + ", fname=" + fname + ", lname=" + lname + ", hash=" + hash + ", salt=" + salt
+				+ ", email=" + email + ", username=" + username + ", friendsListId=" + friendsListId + ", onlineStatus="
+				+ onlineStatus + "]";
 	}
 }
