@@ -1,5 +1,7 @@
 package com.revature;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.beans.Conversation;
 import com.revature.beans.LoginInfo;
+import com.revature.beans.Message;
 import com.revature.beans.User;
+import com.revature.service.ConversationService;
+import com.revature.service.MessageService;
 import com.revature.service.UserService;
 
 @RestController
@@ -20,6 +26,12 @@ public class MainController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	MessageService messageService;
+	
+	@Autowired
+	ConversationService conversationService;
 	
 	/**
 	 * 
@@ -31,7 +43,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/user/{id}")
-	public User getUser(@PathVariable int id) {
+	public Optional<User> getUser(@PathVariable int id) {
 		return userService.getUser(id);
 	}
 	
@@ -54,6 +66,21 @@ public class MainController {
 	@PostMapping("/register")
 	public ResponseEntity<Object> register(@RequestBody User registrationInfo){
 		userService.createUser(registrationInfo);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+	}
+	
+	@PostMapping("/conversations/{id}/message")
+	public ResponseEntity<Object> newMessage(@PathVariable int id, @RequestBody Message message){
+		if(message.getConversationId() != id) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+		}
+		messageService.createMessage(message);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(message);
+	}
+	
+	@PostMapping("/conversations")
+	public ResponseEntity<Object> newConversation(@RequestBody Conversation conversation){
+		conversationService.createConversation(conversation);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 	}
 }

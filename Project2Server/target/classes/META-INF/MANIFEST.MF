@@ -4,8 +4,7 @@ Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: marci
 Implementation-Vendor-Id: com.revature
 Build-Jdk: 1.8.0_171
-Implementation-URL: http://projects.spring.io/spring-boot/Project2Serv
- er/
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/Project2Server
 Created-By: Maven Integration for Eclipse
-Implementation-Vendor: Pivotal Software, Inc.
 
