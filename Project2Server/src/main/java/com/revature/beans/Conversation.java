@@ -5,15 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="CONVERSATION")
 public class Conversation {
 	@Id
-	@SequenceGenerator(name = "CONVERSATION_SEQ", sequenceName = "CONVERSATION_SEQ", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONVERSATION_SEQ")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column
 	private int cId;
 	
