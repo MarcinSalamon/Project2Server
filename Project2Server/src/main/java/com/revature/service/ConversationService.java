@@ -20,8 +20,8 @@ public class ConversationService {
 		return conv;
 	}
 
-	public Iterable<Conversation> getConversationsByIds(List<Integer> ids) {
-		Iterable<Conversation> conversations = convRepo.findAllById(ids);
+	public List<Conversation> getConversationsByIds(List<Integer> ids) {
+		List<Conversation> conversations = (List<Conversation>) convRepo.findAllById(ids);
 		return conversations;
 	}
 }

@@ -1,6 +1,7 @@
 package com.revature;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,7 +90,8 @@ public class MainController {
 	public ResponseEntity<Object> getConversationById(@PathVariable int id){
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		ids.add(id);
-		Iterable<Conversation> convs = conversationService.getConversationsByIds(ids);
-		return ResponseEntity.status(HttpStatus.OK).body(convs);
+		List<Conversation> convs = conversationService.getConversationsByIds(ids);
+		Conversation conv = convs.get(0);
+		return ResponseEntity.status(HttpStatus.OK).body(conv);
 	}
 }
