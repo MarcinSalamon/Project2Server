@@ -18,7 +18,6 @@ public class UserService {
 		
 	public Optional<User> getUser(int userId) {
 		Optional<User> u = userRepo.findById(userId);
-//		u.setPassword("");
 		return u;
 	}
 

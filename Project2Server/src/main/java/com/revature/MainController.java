@@ -1,5 +1,6 @@
 package com.revature;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,5 +83,13 @@ public class MainController {
 	public ResponseEntity<Object> newConversation(@RequestBody Conversation conversation){
 		conversationService.createConversation(conversation);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+	}
+	
+	@GetMapping("/conversations/{id}")
+	public ResponseEntity<Object> getConversationById(@PathVariable int id){
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		ids.add(id);
+		Iterable<Conversation> convs = conversationService.getConversationsByIds(ids);
+		return ResponseEntity.status(HttpStatus.OK).body(convs);
 	}
 }
