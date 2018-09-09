@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/*
+ * Here we have our Online Status table that is mapped to our SQL database
+ */
 @Entity
 @Table(name="ONLINE_STATUS")
 public class OnlineStatus {
@@ -19,6 +22,7 @@ public class OnlineStatus {
 		super();
 	}
 
+	//getters n' setters
 	public int getStatuId() {
 		return statuId;
 	}
@@ -31,6 +35,7 @@ public class OnlineStatus {
 		return status;
 	}
 
+	//toString
 	public void setStatus(String status) {
 		this.status = status;
 	}

@@ -8,9 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/*
+ * Here we have our User table that is mapped to our SQL database
+ */
 @Entity
 @Table(name="USERS")
 public class User {
+	
 	@Id
 	@SequenceGenerator(name = "USERS_SEQ", sequenceName = "USERS_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_SEQ")
@@ -39,6 +43,7 @@ public class User {
 		super();
 	}
 
+	//getters n' setters
 	public int getuId() {
 		return uId;
 	}
@@ -95,6 +100,7 @@ public class User {
 		this.onlineStatus = onlineStatus;
 	}
 
+	//toString
 	@Override
 	public String toString() {
 		return "User [uId=" + uId + ", fname=" + fname + ", lname=" + lname + ", password=" + password + ", email=" + email
