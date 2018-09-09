@@ -42,7 +42,7 @@ public class MainController {
 		return "<html><body><h1>index</h1></body></html>";
 	}
 	
-	@GetMapping("/user/{id}")
+	@RequestMapping(value="/user/{id}", method=RequestMethod.GET)
 	public Optional<User> getUser(@PathVariable int id) {
 		return userService.getUser(id);
 	}

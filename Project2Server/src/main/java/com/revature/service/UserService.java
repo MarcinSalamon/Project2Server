@@ -37,6 +37,10 @@ public class UserService {
 		userRepo.save(user);
 		return user;
 	}
+	
+	public void updateUser(int uId, User user) {
+		userRepo.save(user);
+	}
 
 	public User validateUser(LoginInfo info) {
 		List<User> users = this.retrieveAllUsers();
