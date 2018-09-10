@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,5 +51,9 @@ public class UserService {
 	private String hash(String password) {
 		String hashed = new HashingService().hashPassword(password);
 		return hashed;
+	}
+
+	public ArrayList<User> getUsers(ArrayList<Integer> friendIds) {
+		return (ArrayList<User>) userRepo.findAllById(friendIds);
 	}
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Conversation;
+import com.revature.beans.FriendsList;
 import com.revature.beans.LoginInfo;
 import com.revature.beans.Message;
 import com.revature.beans.User;
@@ -94,6 +95,22 @@ public class MainController {
 		List<Conversation> convs = conversationService.getConversationsByIds(ids);
 		Conversation conv = convs.get(0);
 		return ResponseEntity.status(HttpStatus.OK).body(conv);
+	}
+	
+	@GetMapping("/user/{id}/friends")
+	public ResponseEntity<Object> getFriendsByUserId(@PathVariable int id){
+		Optional<User> dbUser = userService.getUser(id);
+		ArrayList<User> friends = new ArrayList<User>();
+		if(dbUser.isPresent()) {
+			User user = dbUser.get();
+			ArrayList<Integer> friendIds = new ArrayList<Integer>();
+			for(FriendsList friend : user.getFriends()) {
+				friendIds.add(friend.getFriendsId2());
+			}
+			
+			friends = userService.getUsers(friendIds);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(friends);
 	}
 	
 	@ExceptionHandler

@@ -19,16 +19,15 @@ public class FriendsList {
 	@Column(name="U_ID_1")
 	private int friendsId1;
 
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="U_ID_2")
-	private User friend;
+	@Column(name="U_ID_2")
+	private int friendsId2;
 	
-	public User getFriend() {
-		return friend;
+	public int getFriendsId2() {
+		return friendsId2;
 	}
 
-	public void setFriend(User friend) {
-		this.friend = friend;
+	public void setFriend(int friendsId2) {
+		this.friendsId2 = friendsId2;
 	}
 
 	public int getfId() {
