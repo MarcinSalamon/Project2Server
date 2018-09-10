@@ -3,7 +3,6 @@ package com.revature;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +24,15 @@ import com.revature.service.ConversationService;
 import com.revature.service.MessageService;
 import com.revature.service.UserService;
 
+/*
+ * Here is the Main Controller to handle misc requests
+ */
 @RestController
 public class MainController {
 	
+	/*
+	 * Pulling all services need for controller
+	 */
 	@Autowired
 	UserService userService;
 	
@@ -38,17 +43,11 @@ public class MainController {
 	ConversationService conversationService;
 	
 	/**
-	 * 
 	 * @return documentation
 	 */
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index() {
 		return "<html><body><h1>index</h1></body></html>";
-	}
-	
-	@GetMapping("/user/{id}")
-	public Optional<User> getUser(@PathVariable int id) {
-		return userService.getUser(id);
 	}
 	
 	/**
@@ -67,12 +66,27 @@ public class MainController {
 		return ResponseEntity.ok(validated);
 	}
 	
+	/**
+	 * local endpoint
+	 * http://localhost:8080/register
+	 * 
+	 * @param registrationInfo
+	 * @return user if correct
+	 */
 	@PostMapping("/register")
 	public ResponseEntity<Object> register(@RequestBody User registrationInfo){
 		userService.createUser(registrationInfo);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 	}
 	
+	/**
+	 * local endpoint
+	 * http://localhost:8080/conversation/{id}/message
+	 * 
+	 * @param id can change dynamically
+	 * @param message 
+	 * @return message if correct
+	 */
 	@PostMapping("/conversations/{id}/message")
 	public ResponseEntity<Object> newMessage(@PathVariable int id, @RequestBody Message message){
 		if(message.getConversationId() != id) {
@@ -82,6 +96,13 @@ public class MainController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(message);
 	}
 	
+	/**
+	 * local endpoint
+	 * http://localhost:8080/conversations
+	 * 
+	 * @param conversation
+	 * @return conversation if correct
+	 */
 	@PostMapping("/conversations")
 	public ResponseEntity<Object> newConversation(@RequestBody Conversation conversation){
 		conversationService.createConversation(conversation);
