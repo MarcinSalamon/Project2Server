@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/*
+ * Here we have our Friends List table that is mapped to our SQL database
+ */
 @Entity
 @Table(name="FRIENDS_LIST")
 public class FriendsList {
@@ -19,6 +22,11 @@ public class FriendsList {
 	@Column(name="U_ID_2")
 	private int friendsId2;
 
+	public FriendsList() {
+		super();
+	}
+
+	//getters n' setters
 	public int getF_id() {
 		return f_id;
 	}
@@ -43,8 +51,5 @@ public class FriendsList {
 		this.friendsId2 = friendsId2;
 	}
 
-	public FriendsList() {
-		super();
-	}
 
 }

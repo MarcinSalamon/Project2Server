@@ -6,9 +6,13 @@ import java.security.NoSuchAlgorithmException;
 
 import org.springframework.stereotype.Service;
 
+/*
+ * Here is our service for Hashing
+ */
 @Service
 public class HashingService {
-	// check
+	
+	// Hashing password
 	public String hashPassword(String password) {
 		System.out.println("[LOG] - In ERSService.hashPassword()");
 		try {
@@ -20,7 +24,7 @@ public class HashingService {
 		}
 	}
 
-	// check
+	// Hashing conversion 
 	public String bytesToHex(byte[] bytes) {
 		System.out.println("[LOG] - In ERSService.bytesToHex()");
 		char[] hexArray = "0123456789ABCDEF".toCharArray();

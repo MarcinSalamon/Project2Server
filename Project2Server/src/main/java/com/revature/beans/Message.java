@@ -12,6 +12,9 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+/*
+ * Here we have our Message table that is mapped to our SQL database
+ */
 @Entity
 @Table(name = "MESSAGE")
 public class Message {
@@ -35,6 +38,11 @@ public class Message {
 	@Column(name = "CONVERSATION_ID")
 	private int conversationId;
 
+	public Message() {
+		super();
+	}
+	
+	//getters n' setters
 	public int getmId() {
 		return mId;
 	}
@@ -75,8 +83,5 @@ public class Message {
 		this.conversationId = conversationId;
 	}
 
-	public Message() {
-		super();
-	}
 
 }
