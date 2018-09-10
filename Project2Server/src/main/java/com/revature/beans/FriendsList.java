@@ -39,7 +39,7 @@ public class FriendsList {
 	}
 
 	public int getF_id() {
-		return f_id;
+		return fId;
 	}
 
 	public void setfId(int fId) {
@@ -52,10 +52,6 @@ public class FriendsList {
 
 	public void setFriendsId1(int friendsId1) {
 		this.friendsId1 = friendsId1;
-	}
-  
-	public int getFriendsId2() {
-		return friendsId2;
 	}
 
 	public void setFriendsId2(int friendsId2) {
