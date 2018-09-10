@@ -54,8 +54,9 @@ public class UserService {
 	public User validateUser(LoginInfo info) {
 		List<User> users = this.retrieveAllUsers();
 		for (User user : users) {
+			System.out.println(user);
+			System.out.println( this.hash(info.getPassword()));
 			if (user.getUsername().equals(info.getUsername()) && this.hash(info.getPassword()).equals(user.getPassword())) {
-				user.setPassword("");
 				return user;
 			}
 		}

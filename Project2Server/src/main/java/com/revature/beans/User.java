@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 /*
  * Here we have our User table that is mapped to our SQL database
  */
@@ -28,6 +31,7 @@ public class User {
 	private String lname;
 	
 	@Column(name="PW_HASH")
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
 	@Column(name="EMAIL")
