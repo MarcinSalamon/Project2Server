@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/*
+ * Here we have our Conversation table that is mapped to our SQL database
+ */
 @Entity
 @Table(name="CONVERSATION")
 public class Conversation {
@@ -27,6 +30,7 @@ public class Conversation {
 		super();
 	}
 
+	//getters n' setters
 	public int getcId() {
 		return cId;
 	}
