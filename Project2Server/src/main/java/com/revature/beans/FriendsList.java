@@ -30,16 +30,12 @@ public class FriendsList {
 	}
 	
   //getters n' setters
-	public int getFriendsId2() {
-		return friendsId2;
-	}
-
 	public void setFriend(int friendsId2) {
 		this.friendsId2 = friendsId2;
 	}
 
 	public int getF_id() {
-		return f_id;
+		return fId;
 	}
 
 	public void setfId(int fId) {
