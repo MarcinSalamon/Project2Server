@@ -33,6 +33,12 @@ public class UserService {
 		return u;
 	}
 
+	//PUT method for updating a specific user
+	public void updateUser(int uId, User user) {
+		user.setPassword(this.hash(user.getPassword()));
+		userRepo.save(user);
+	}
+	
 	/**
 	 * Hashes the password and inserts user into the database
 	 * 
@@ -45,11 +51,6 @@ public class UserService {
 		return user;
 	}
 	
-	//PUT method for updating a specific user
-	public void updateUser(int uId, User user) {
-		userRepo.save(user);
-	}
-
 	public User validateUser(LoginInfo info) {
 		List<User> users = this.retrieveAllUsers();
 		for (User user : users) {
