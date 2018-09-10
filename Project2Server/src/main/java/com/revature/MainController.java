@@ -1,8 +1,12 @@
 package com.revature;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Conversation;
+import com.revature.beans.FriendsList;
 import com.revature.beans.LoginInfo;
 import com.revature.beans.Message;
 import com.revature.beans.User;
@@ -102,5 +107,35 @@ public class MainController {
 	public ResponseEntity<Object> newConversation(@RequestBody Conversation conversation){
 		conversationService.createConversation(conversation);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+	}
+	
+	@GetMapping("/conversations/{id}")
+	public ResponseEntity<Object> getConversationById(@PathVariable int id){
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		ids.add(id);
+		List<Conversation> convs = conversationService.getConversationsByIds(ids);
+		Conversation conv = convs.get(0);
+		return ResponseEntity.status(HttpStatus.OK).body(conv);
+	}
+	
+	@GetMapping("/user/{id}/friends")
+	public ResponseEntity<Object> getFriendsByUserId(@PathVariable int id){
+		Optional<User> dbUser = userService.getUser(id);
+		ArrayList<User> friends = new ArrayList<User>();
+		if(dbUser.isPresent()) {
+			User user = dbUser.get();
+			ArrayList<Integer> friendIds = new ArrayList<Integer>();
+			for(FriendsList friend : user.getFriends()) {
+				friendIds.add(friend.getFriendsId2());
+			}
+			
+			friends = userService.getUsers(friendIds);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(friends);
+	}
+	
+	@ExceptionHandler
+	public Object handleExceptions() {
+		return HttpStatus.BAD_REQUEST;
 	}
 }

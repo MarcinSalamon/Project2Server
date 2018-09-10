@@ -1,12 +1,19 @@
 package com.revature.beans;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 /*
  * Here we have our User table that is mapped to our SQL database
@@ -28,6 +35,7 @@ public class User {
 	private String lname;
 	
 	@Column(name="PW_HASH")
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
 	@Column(name="EMAIL")
@@ -38,6 +46,10 @@ public class User {
 	
 	@Column(name="ONLINE_STATUS")
 	private int onlineStatus;
+	
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name="F_ID")
+	private List<FriendsList> friends;
 
 	public User() {
 		super();
@@ -46,6 +58,14 @@ public class User {
 	//getters n' setters
 	public int getuId() {
 		return uId;
+	}
+
+	public List<FriendsList> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<FriendsList> friends) {
+		this.friends = friends;
 	}
 
 	public void setuId(int uId) {
