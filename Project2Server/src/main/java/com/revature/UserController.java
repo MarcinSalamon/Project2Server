@@ -67,7 +67,7 @@ public class UserController {
 	 * 
 	 * @return all users if correct
 	 */
-	@RequestMapping(value="/users")
+	@GetMapping(value="/user")
 	public List<User> getAllUsers() {
 		return userService.retrieveAllUsers();
 	}
