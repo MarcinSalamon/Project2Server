@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.FriendsList;
 import com.revature.beans.User;
-import com.revature.service.UserService;
 
 /*
  * Here is the User Controller to handle User related requests
