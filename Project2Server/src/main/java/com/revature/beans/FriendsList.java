@@ -22,21 +22,19 @@ public class FriendsList {
 	@Column(name="U_ID_1")
 	private int friendsId1;
 
-	@Column(name="U_ID_2")
-	private int friendsId2;
+
+	@OneToOne
+	@JoinColumn(name="U_ID_2")
+	private User friendsId2;
   
   public FriendsList() {
 		super();
 	}
 	
   //getters n' setters
-	public void setFriend(int friendsId2) {
-		this.friendsId2 = friendsId2;
-	}
-
-	public int getF_id() {
-		return fId;
-	}
+	public int getfId() {
+  		return fId;
+  }
 
 	public void setfId(int fId) {
 		this.fId = fId;
@@ -50,11 +48,11 @@ public class FriendsList {
 		this.friendsId1 = friendsId1;
 	}
   
-	public int getFriendsId2() {
+	public User getFriendsId2() {
 		return friendsId2;
 	}
 
-	public void setFriendsId2(int friendsId2) {
+	public void setFriendsId2(User friendsId2) {
 		this.friendsId2 = friendsId2;
 	}
 
