@@ -58,14 +58,6 @@ public class User {
 		return uId;
 	}
 
-	public List<FriendsList> getFriends() {
-		return friends;
-	}
-
-	public void setFriends(List<FriendsList> friends) {
-		this.friends = friends;
-	}
-
 	public void setuId(int uId) {
 		this.uId = uId;
 	}
