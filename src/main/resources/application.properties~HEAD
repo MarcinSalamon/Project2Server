@@ -2,10 +2,7 @@
 # replaces the beans.xml
 #server.port=0  will be a random number
 server.port=8080
-<<<<<<< HEAD
 #debug=true
-=======
->>>>>>> 370eead5f7fbfab377b558af577ab29d9457ef67
 
 
 #JDBC Credentials

@@ -116,11 +116,4 @@ public class MainController {
 		return ResponseEntity.status(HttpStatus.OK).body(conv);
 	}
 	
-<<<<<<< HEAD
-=======
-	@ExceptionHandler
-	public Object handleExceptions() {
-		return HttpStatus.BAD_REQUEST;
-	}
->>>>>>> 370eead5f7fbfab377b558af577ab29d9457ef67
 }

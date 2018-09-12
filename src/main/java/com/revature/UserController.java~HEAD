@@ -9,10 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.ExceptionHandler;
-=======
->>>>>>> 370eead5f7fbfab377b558af577ab29d9457ef67
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,11 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.FriendsList;
 import com.revature.beans.User;
-<<<<<<< HEAD
-=======
-import com.revature.service.FriendsService;
-import com.revature.service.UserService;
->>>>>>> 370eead5f7fbfab377b558af577ab29d9457ef67
 
 /*
  * Here is the User Controller to handle User related requests
@@ -40,13 +32,8 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-<<<<<<< HEAD
 	//Implementing logger
 	private static final Logger logger = LogManager.getLogger(UserController.class);
-=======
-	@Autowired
-	FriendsService friendService;
->>>>>>> 370eead5f7fbfab377b558af577ab29d9457ef67
 	
 	/**
 	 * local endpoint
@@ -81,21 +68,10 @@ public class UserController {
 	 * 
 	 * @return all users if correct
 	 */
-	@GetMapping(value="/user")
+	@RequestMapping(value="/users")
 	public List<User> getAllUsers() {
 		return userService.retrieveAllUsers();
 	}
-<<<<<<< HEAD
-=======
-	
-	@GetMapping("/user/{id}/friends")
-	public ResponseEntity<Object> getFriendsByUserId(@PathVariable int id){
-		List<User> friends = friendService.getFriendsById(id);
-		return ResponseEntity.status(HttpStatus.OK).body(friends);
-	}
-	
-	
->>>>>>> 370eead5f7fbfab377b558af577ab29d9457ef67
 
 	@GetMapping("/user/{id}/friends")
 	public ResponseEntity<Object> getFriendsByUserId(@PathVariable int id){
