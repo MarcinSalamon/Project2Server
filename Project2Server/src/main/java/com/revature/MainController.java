@@ -118,24 +118,4 @@ public class MainController {
 		return ResponseEntity.status(HttpStatus.OK).body(conv);
 	}
 	
-	@GetMapping("/user/{id}/friends")
-	public ResponseEntity<Object> getFriendsByUserId(@PathVariable int id){
-		Optional<User> dbUser = userService.getUser(id);
-		ArrayList<User> friends = new ArrayList<User>();
-		if(dbUser.isPresent()) {
-			User user = dbUser.get();
-			ArrayList<Integer> friendIds = new ArrayList<Integer>();
-			for(FriendsList friend : user.getFriends()) {
-				friendIds.add(friend.getFriendsId2());
-			}
-			
-			friends = userService.getUsers(friendIds);
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(friends);
-	}
-	
-	@ExceptionHandler
-	public Object handleExceptions() {
-		return HttpStatus.BAD_REQUEST;
-	}
 }
