@@ -14,8 +14,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 /*
  * Here we have our User table that is mapped to our SQL database
@@ -48,7 +46,11 @@ public class User {
 	
 	@Column(name="ONLINE_STATUS")
 	private int onlineStatus;
-  
+	
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name="F_ID")
+	private List<FriendsList> friends;
+
 	public User() {
 		super();
 	}
