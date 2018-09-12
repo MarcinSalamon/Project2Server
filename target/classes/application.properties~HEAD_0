@@ -2,6 +2,10 @@
 # replaces the beans.xml
 #server.port=0  will be a random number
 server.port=8080
+<<<<<<< HEAD
+#debug=true
+=======
+>>>>>>> 370eead5f7fbfab377b558af577ab29d9457ef67
 
 
 #JDBC Credentials
@@ -14,6 +18,9 @@ spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
 spring.jpa.show-sql=true
 spring.jpa.database=oracle
 spring.jpa.database-platform=org.hibernate.dialect.Oracle10gDialect
+spring.jpa.properties.hibernate.format_sql=true
 
 #Spring Actuator
 management.endpoints.web.exposure.include=*
+
+
