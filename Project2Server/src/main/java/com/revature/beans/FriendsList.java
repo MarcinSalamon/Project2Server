@@ -2,6 +2,7 @@ package com.revature.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -21,6 +22,7 @@ public class FriendsList {
 	@Column(name="U_ID_1")
 	private int friendsId1;
 
+
 	@OneToOne
 	@JoinColumn(name="U_ID_2")
 	private User friendsId2;
@@ -31,8 +33,8 @@ public class FriendsList {
 	
   //getters n' setters
 	public int getfId() {
-		return fId;
-	}
+  		return fId;
+  }
 
 	public void setfId(int fId) {
 		this.fId = fId;

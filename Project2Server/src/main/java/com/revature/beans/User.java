@@ -14,7 +14,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -49,7 +48,7 @@ public class User {
 	
 	@Column(name="ONLINE_STATUS")
 	private int onlineStatus;
-	
+  
 	public User() {
 		super();
 	}
@@ -57,6 +56,14 @@ public class User {
 	//getters n' setters
 	public int getuId() {
 		return uId;
+	}
+
+	public List<FriendsList> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<FriendsList> friends) {
+		this.friends = friends;
 	}
 
 	public void setuId(int uId) {
