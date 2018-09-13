@@ -87,7 +87,7 @@ public class MainController {
 	 * @param message 
 	 * @return message if correct
 	 */
-	@PostMapping("/conversations/{id}/message")
+	@PostMapping("/conversation/{id}/message")
 	public ResponseEntity<Object> newMessage(@PathVariable int id, @RequestBody Message message){
 		if(message.getConversationId() != id) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
@@ -103,13 +103,13 @@ public class MainController {
 	 * @param conversation
 	 * @return conversation if correct
 	 */
-	@PostMapping("/conversations")
+	@PostMapping("/conversation")
 	public ResponseEntity<Object> newConversation(@RequestBody Conversation conversation){
 		conversationService.createConversation(conversation);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 	}
 	
-	@GetMapping("/conversations/{id}")
+	@GetMapping("/conversation/{id}")
 	public ResponseEntity<Object> getConversationById(@PathVariable int id){
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		ids.add(id);
