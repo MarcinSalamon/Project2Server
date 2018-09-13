@@ -73,7 +73,7 @@ public class MainController {
 	 * @param registrationInfo
 	 * @return user if correct
 	 */
-	@PostMapping("/register")
+	@PostMapping("/user")
 	public ResponseEntity<Object> register(@RequestBody User registrationInfo){
 		userService.createUser(registrationInfo);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
@@ -97,18 +97,25 @@ public class MainController {
 	}
 	
 	/**
-	 * local endpoint
-	 * http://localhost:8080/conversations
+	 * endpoint
+	 * /conversations
 	 * 
-	 * @param conversation
-	 * @return conversation if correct
+	 * @param conversation to be created
+	 * @return HttpStatus Created
 	 */
 	@PostMapping("/conversation")
 	public ResponseEntity<Object> newConversation(@RequestBody Conversation conversation){
 		conversationService.createConversation(conversation);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+		return ResponseEntity.status(HttpStatus.CREATED).body(null);
 	}
-	
+
+	/**
+	 * endpoint
+	 * /converstaion/{id}
+	 * 
+	 * @param id of a conversation
+	 * @return conversation with that id
+	 */
 	@GetMapping("/conversation/{id}")
 	public ResponseEntity<Object> getConversationById(@PathVariable int id){
 		ArrayList<Integer> ids = new ArrayList<Integer>();
