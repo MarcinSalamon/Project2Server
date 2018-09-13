@@ -27,8 +27,13 @@ public class ConversationService {
 		return conv;
 	}
 
-	public List<Conversation> getConversationsByIds(List<Integer> ids) {
-		List<Conversation> conversations = (List<Conversation>) convRepo.findAllById(ids);
+	public Iterable<Conversation> getConversationsByIds(Iterable<Integer> ids) {
+		Iterable<Conversation> conversations = convRepo.findAllById(ids);
+		return conversations;
+	}
+
+	public Iterable<Conversation> getConversationsById(int id) {
+		Iterable<Conversation> conversations = convRepo.findByUId1(id);
 		return conversations;
 	}
 }
