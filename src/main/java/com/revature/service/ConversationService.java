@@ -22,15 +22,21 @@ public class ConversationService {
 	ConversationRepo convRepo;
 	
 	/**
-	 * creates a conversation 
-	 * @param conv
-	 * @return
+	 * persists a conversation
+	 * @param conv takes in a conversation
+	 * @return returns the same conversation
 	 */
 	public Conversation createConversation(Conversation conv) {
 		convRepo.save(conv);
 		return conv;
 	}
 
+	/**
+	 * Gets all the conversations that are matching these ids
+	 * 
+	 * @param ids list of ids of conversations
+	 * @return list of conversations
+	 */
 	public List<Conversation> getConversationsByIds(List<Integer> ids) {
 		List<Conversation> conversations = (List<Conversation>) convRepo.findAllById(ids);
 		return conversations;
