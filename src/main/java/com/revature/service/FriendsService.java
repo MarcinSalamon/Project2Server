@@ -16,6 +16,9 @@ public class FriendsService {
 	@Autowired
 	FriendsRepo friendsRepo;
 	
+	@Autowired
+	UserService userService;
+	
 	public List<User> getFriendsById(int id){
 		List<FriendsList> fList = (List<FriendsList>) friendsRepo.findAll();
 		List<User> friends = new ArrayList<User>();
@@ -27,4 +30,5 @@ public class FriendsService {
 		
 		return friends;
 	}
+	
 }

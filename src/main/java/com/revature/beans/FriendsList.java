@@ -25,10 +25,8 @@ public class FriendsList {
 	@Column(name="F_ID")
 	private int fId;
 	
-
 	@Column(name="U_ID_1")
 	private int friendsId1;
-
 
 	@OneToOne
 	@JoinColumn(name="U_ID_2")
