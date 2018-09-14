@@ -52,13 +52,15 @@ public class MainController {
 	
 	/**
 	 * local endpoint
-	 * http://localhost:8080/api/v1/login
+	 * http://localhost:8080/login
 	 * 
 	 * @param info is json with login and password fields
 	 * @return user if username and password are correct
 	 */
 	@PostMapping("/login")
-	public ResponseEntity<Object> login(@RequestBody LoginInfo info) {
+	public ResponseEntity<Object> login(@RequestBody String[] creds) {
+		System.out.println(creds[0] + " " + creds[1]);
+		LoginInfo info = new LoginInfo(creds[0], creds[1]);
 		User validated = userService.validateUser(info);
 		if(validated == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
