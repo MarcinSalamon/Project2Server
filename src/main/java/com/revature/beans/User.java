@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 @Table(name="USERS")
 @DynamicUpdate(value=true)
 @SelectBeforeUpdate(value=true)
-//@JsonInclude(Include.NON_NULL)
 public class User {
 	
 	@Id
