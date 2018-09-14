@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.beans.Conversation;
 import com.revature.beans.User;
+import com.revature.service.ConversationService;
 import com.revature.service.FriendsService;
 import com.revature.service.UserService;
 
@@ -32,6 +34,9 @@ public class UserController {
 	
 	@Autowired
 	FriendsService friendService;
+	
+	@Autowired
+	ConversationService conversationService;
 	
 	/**
 	 * endpoint
@@ -73,6 +78,7 @@ public class UserController {
 	/**
 	 * endpoint
 	 * /user/{id}/friend
+   *
 	 * @param id of user
 	 * @return all friends of specified user
 	 */
@@ -82,6 +88,10 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body(friends);
 	}
 	
-	
+	@GetMapping("/user/{id}/conversation")
+	public ResponseEntity<Iterable<Conversation>> getConversationsByUserId(@PathVariable int id){
+		Iterable<Conversation> conversations = conversationService.getConversationsById(id);
+		return new ResponseEntity<Iterable<Conversation>>(conversations, HttpStatus.OK);
+	}
 
 }

@@ -2,7 +2,6 @@ package com.revature;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Conversation;
-import com.revature.beans.FriendsList;
 import com.revature.beans.LoginInfo;
 import com.revature.beans.Message;
 import com.revature.beans.User;
@@ -52,13 +50,15 @@ public class MainController {
 	
 	/**
 	 * local endpoint
-	 * http://localhost:8080/api/v1/login
+	 * http://localhost:8080/login
 	 * 
 	 * @param info is json with login and password fields
 	 * @return user if username and password are correct
 	 */
 	@PostMapping("/login")
-	public ResponseEntity<Object> login(@RequestBody LoginInfo info) {
+	public ResponseEntity<Object> login(@RequestBody String[] creds) {
+		System.out.println(creds[0] + " " + creds[1]);
+		LoginInfo info = new LoginInfo(creds[0], creds[1]);
 		User validated = userService.validateUser(info);
 		if(validated == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
@@ -120,7 +120,7 @@ public class MainController {
 	public ResponseEntity<Object> getConversationById(@PathVariable int id){
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		ids.add(id);
-		List<Conversation> convs = conversationService.getConversationsByIds(ids);
+		List<Conversation> convs = (List<Conversation>) conversationService.getConversationsByIds(ids);
 		Conversation conv = convs.get(0);
 		return ResponseEntity.status(HttpStatus.OK).body(conv);
 	}

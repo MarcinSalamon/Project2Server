@@ -37,8 +37,8 @@ public class ConversationService {
 	 * @param ids list of ids of conversations
 	 * @return list of conversations
 	 */
-	public List<Conversation> getConversationsByIds(List<Integer> ids) {
-		List<Conversation> conversations = (List<Conversation>) convRepo.findAllById(ids);
+	public Iterable<Conversation> getConversationsById(int id) {
+		Iterable<Conversation> conversations = convRepo.findByUId1(id);
 		return conversations;
 	}
 }
