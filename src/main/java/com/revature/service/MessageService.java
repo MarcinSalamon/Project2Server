@@ -20,13 +20,23 @@ public class MessageService {
 	@Autowired
 	MessageRepo messageRepo;
 	
-	//GET method by a specific id
+	/**
+	 * gets a message by its id
+	 * 
+	 * @param mId id of the message to get
+	 * @return Optional of generic type Message, message with specified id
+	 */
 	public Optional<Message> getMessage(int mId) {
 		Optional<Message> m = messageRepo.findById(mId);
 		return m;
 	}
 	
-	//POST method for creating a new message
+	/**
+	 * persists a message to the database
+	 * 
+	 * @param m message to be persisted
+	 * @return message that was persisted
+	 */
 	public Message createMessage(Message m){
 		messageRepo.save(m);
 		return m;

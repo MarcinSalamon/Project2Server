@@ -19,6 +19,11 @@ public class FriendsService {
 	@Autowired
 	UserService userService;
 	
+	/**
+	 * takes in a user id, and returns all the friends of that user
+	 * @param id of a user who's friends are to be returned
+	 * @return list of friends of the user
+	 */
 	public List<User> getFriendsById(int id){
 		List<FriendsList> fList = (List<FriendsList>) friendsRepo.findAll();
 		List<User> friends = new ArrayList<User>();
