@@ -21,7 +21,11 @@ public class ConversationService {
 	@Autowired
 	ConversationRepo convRepo;
 	
-	//POST method for conversation
+	/**
+	 * creates a conversation 
+	 * @param conv
+	 * @return
+	 */
 	public Conversation createConversation(Conversation conv) {
 		convRepo.save(conv);
 		return conv;
