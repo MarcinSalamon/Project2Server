@@ -7,8 +7,14 @@ public class LoginInfo {
 	private String username;
 	private String password;
 	
-	public LoginInfo() {
+	public LoginInfo(String username, String password) {
 		super();
+		this.username = username;
+		this.password = password;
+	}
+	
+	public LoginInfo() {
+		
 	}
 	
 	//getters n' setters
@@ -29,8 +35,5 @@ public class LoginInfo {
 	@Override
 	public String toString() {
 		return "LoginInfo [username=" + username + ", password=" + password + "]";
-	}
-	
-	
-	
+	}	
 }

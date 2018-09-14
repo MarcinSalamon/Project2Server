@@ -3,6 +3,7 @@ package com.revature;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Conversation;
-import com.revature.beans.FriendsList;
 import com.revature.beans.LoginInfo;
 import com.revature.beans.Message;
 import com.revature.beans.User;
@@ -52,13 +52,15 @@ public class MainController {
 	
 	/**
 	 * local endpoint
-	 * http://localhost:8080/api/v1/login
+	 * http://localhost:8080/login
 	 * 
 	 * @param info is json with login and password fields
 	 * @return user if username and password are correct
 	 */
 	@PostMapping("/login")
-	public ResponseEntity<Object> login(@RequestBody LoginInfo info) {
+	public ResponseEntity<Object> login(@RequestBody String[] creds) {
+		System.out.println(creds[0] + " " + creds[1]);
+		LoginInfo info = new LoginInfo(creds[0], creds[1]);
 		User validated = userService.validateUser(info);
 		if(validated == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
@@ -73,7 +75,7 @@ public class MainController {
 	 * @param registrationInfo
 	 * @return user if correct
 	 */
-	@PostMapping("/register")
+	@PostMapping("/user")
 	public ResponseEntity<Object> register(@RequestBody User registrationInfo){
 		userService.createUser(registrationInfo);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
@@ -87,7 +89,7 @@ public class MainController {
 	 * @param message 
 	 * @return message if correct
 	 */
-	@PostMapping("/conversations/{id}/message")
+	@PostMapping("/conversation/{id}/message")
 	public ResponseEntity<Object> newMessage(@PathVariable int id, @RequestBody Message message){
 		if(message.getConversationId() != id) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
@@ -97,24 +99,28 @@ public class MainController {
 	}
 	
 	/**
-	 * local endpoint
-	 * http://localhost:8080/conversations
+	 * endpoint
+	 * /conversations
 	 * 
-	 * @param conversation
-	 * @return conversation if correct
+	 * @param conversation to be created
+	 * @return HttpStatus Created
 	 */
-	@PostMapping("/conversations")
+	@PostMapping("/conversation")
 	public ResponseEntity<Object> newConversation(@RequestBody Conversation conversation){
 		conversationService.createConversation(conversation);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+		return ResponseEntity.status(HttpStatus.CREATED).body(null);
 	}
-	
-	@GetMapping("/conversations/{id}")
+
+	/**
+	 * endpoint
+	 * /converstaion/{id}
+	 * 
+	 * @param id of a conversation
+	 * @return conversation with that id
+	 */
+	@GetMapping("/conversation/{id}")
 	public ResponseEntity<Object> getConversationById(@PathVariable int id){
-		ArrayList<Integer> ids = new ArrayList<Integer>();
-		ids.add(id);
-		List<Conversation> convs = conversationService.getConversationsByIds(ids);
-		Conversation conv = convs.get(0);
+		Optional<Conversation> conv = conversationService.getConversationById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(conv);
 	}
 	
