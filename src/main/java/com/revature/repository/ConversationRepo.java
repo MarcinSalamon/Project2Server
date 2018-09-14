@@ -8,5 +8,4 @@ import com.revature.beans.Conversation;
 public interface ConversationRepo extends CrudRepository<Conversation, Integer>{
 
 	Iterable<Conversation> findByUId1(int id);
-
 }

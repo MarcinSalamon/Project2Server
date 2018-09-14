@@ -21,17 +21,22 @@ public class ConversationService {
 	@Autowired
 	ConversationRepo convRepo;
 	
-	//POST method for conversation
+	/**
+	 * persists a conversation
+	 * @param conv takes in a conversation
+	 * @return returns the same conversation
+	 */
 	public Conversation createConversation(Conversation conv) {
 		convRepo.save(conv);
 		return conv;
 	}
 
-	public Iterable<Conversation> getConversationsByIds(Iterable<Integer> ids) {
-		Iterable<Conversation> conversations = convRepo.findAllById(ids);
-		return conversations;
-	}
-
+	/**
+	 * Gets all the conversations that are matching these ids
+	 * 
+	 * @param ids list of ids of conversations
+	 * @return list of conversations
+	 */
 	public Iterable<Conversation> getConversationsById(int id) {
 		Iterable<Conversation> conversations = convRepo.findByUId1(id);
 		return conversations;
