@@ -1,6 +1,5 @@
 package com.revature;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.beans.FriendsList;
+import com.revature.beans.Conversation;
 import com.revature.beans.User;
+import com.revature.service.ConversationService;
 import com.revature.service.FriendsService;
 import com.revature.service.UserService;
 
@@ -35,12 +35,15 @@ public class UserController {
 	@Autowired
 	FriendsService friendService;
 	
+	@Autowired
+	ConversationService conversationService;
+	
 	/**
-	 * local endpoint
-	 * http://localhost:8080/user/{id}
+	 * endpoint
+	 * /user/{id}
 	 * 
-	 * @param id can change dynamically
-	 * @return specific user if correct
+	 * @param id of specific user
+	 * @return specific user
 	 */
 	@RequestMapping(value="/user/{id}", method=RequestMethod.GET)
 	public Optional<User> getUser(@PathVariable int id) {
@@ -48,12 +51,12 @@ public class UserController {
 	}
 	
 	/**
-	 * local endpoint 
-	 * http://localhost:8080/user/{id}
+	 * endpoint 
+	 * /user/{id}
 	 * 
-	 * @param user 
-	 * @param uId can change dynamically
-	 * @return a specifically updated user if correct
+	 * @param user information to update
+	 * @param id of user to be updated
+	 * @return HttpStatus Created
 	 */
 	@RequestMapping(method=RequestMethod.PUT, value="/user/{id}")
 	public  ResponseEntity<Object> updateUser(@RequestBody User user, @PathVariable("id") int uId) {
@@ -62,22 +65,33 @@ public class UserController {
 	}
 	
 	/**
-	 * local endpoint 
-	 * http://localhost:8080/users
+	 * endpoint 
+	 * /users
 	 * 
-	 * @return all users if correct
+	 * @return all users
 	 */
 	@GetMapping(value="/user")
 	public List<User> getAllUsers() {
 		return userService.retrieveAllUsers();
 	}
 	
-	@GetMapping("/user/{id}/friends")
+	/**
+	 * endpoint
+	 * /user/{id}/friend
+   *
+	 * @param id of user
+	 * @return all friends of specified user
+	 */
+	@GetMapping("/user/{id}/friend")
 	public ResponseEntity<Object> getFriendsByUserId(@PathVariable int id){
 		List<User> friends = friendService.getFriendsById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(friends);
 	}
 	
-	
+	@GetMapping("/user/{id}/conversation")
+	public ResponseEntity<Iterable<Conversation>> getConversationsByUserId(@PathVariable int id){
+		Iterable<Conversation> conversations = conversationService.getConversationsByUserId(id);
+		return new ResponseEntity<Iterable<Conversation>>(conversations, HttpStatus.OK);
+	}
 
 }

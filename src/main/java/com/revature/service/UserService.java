@@ -23,18 +23,31 @@ public class UserService {
 	@Autowired
 	UserRepo userRepo;
 	
-	//GET method for all users
+	/**
+	 * retrieves a List of all users from the database
+	 * @return
+	 */
 	public List<User> retrieveAllUsers() {
 		return (List<User>) userRepo.findAll();
 	}
 	
-	//GET method for a specific user
+	/**
+	 * retrieves a user by id
+	 * 
+	 * @param userId id of user to be retrieved
+	 * @return Optional of generic User of specified user
+	 */
 	public Optional<User> getUser(int userId) {
 		Optional<User> u = userRepo.findById(userId);
 		return u;
 	}
 
-	//PUT method for updating a specific user
+	/**
+	 * updates user with values of the new user
+	 * 
+	 * @param uId user id
+	 * @param user information of user to be persisted
+	 */
 	public void updateUser(int uId, User user) {
 		user.setPassword(this.hash(user.getPassword()));
 		userRepo.save(user);
@@ -43,8 +56,8 @@ public class UserService {
 	/**
 	 * Hashes the password and inserts user into the database
 	 * 
-	 * @param user
-	 * @return
+	 * @param user takes in a user to be created
+	 * @return user taken in
 	 */
 	public User createUser(User user) {
 		user.setPassword(this.hash(user.getPassword()));
@@ -52,11 +65,15 @@ public class UserService {
 		return user;
 	}
 	
+	/**
+	 * validates if the username and password are matching a user in the database
+	 * 
+	 * @param info information of the user
+	 * @return user information that matches login information
+	 */
 	public User validateUser(LoginInfo info) {
 		List<User> users = this.retrieveAllUsers();
 		for (User user : users) {
-			System.out.println(user);
-			System.out.println( this.hash(info.getPassword()));
 			if (user.getUsername().equals(info.getUsername()) && this.hash(info.getPassword()).equals(user.getPassword())) {
 				return user;
 			}
@@ -65,7 +82,9 @@ public class UserService {
 	}
 
 	/**
-	 * @param password
+	 * hashes the password
+	 * 
+	 * @param password is the unhashed password
 	 * @return hashed password
 	 */
 	private String hash(String password) {
@@ -73,6 +92,12 @@ public class UserService {
 		return hashed;
 	}
 
+	/**
+	 * returns all users matching user id list
+	 * 
+	 * @param friendIds ids of all users to be retrieved
+	 * @return list of users retrieved
+	 */
 	public ArrayList<User> getUsers(ArrayList<Integer> friendIds) {
 		return (ArrayList<User>) userRepo.findAllById(friendIds);
 	}

@@ -12,7 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class HashingService {
 	
-	// Hashing password
+	/**
+	 * takes in a password and returns the hashed password
+	 * 
+	 * @param password to be hashed
+	 * @return hashed password
+	 */
 	public String hashPassword(String password) {
 		System.out.println("[LOG] - In ERSService.hashPassword()");
 		try {
@@ -24,7 +29,12 @@ public class HashingService {
 		}
 	}
 
-	// Hashing conversion 
+	/**
+	 * takes in a byte array and returns it hashed
+	 * 
+	 * @param bytes array of bytes to be hashed
+	 * @return hashed String
+	 */
 	public String bytesToHex(byte[] bytes) {
 		System.out.println("[LOG] - In ERSService.bytesToHex()");
 		char[] hexArray = "0123456789ABCDEF".toCharArray();
