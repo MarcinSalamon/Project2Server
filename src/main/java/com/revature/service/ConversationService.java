@@ -2,6 +2,7 @@ package com.revature.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,8 +38,12 @@ public class ConversationService {
 	 * @param ids list of ids of conversations
 	 * @return list of conversations
 	 */
-	public Iterable<Conversation> getConversationsById(int id) {
-		Iterable<Conversation> conversations = convRepo.findByUId1(id);
+	public Iterable<Conversation> getConversationsByUserId(int id) {
+		Iterable<Conversation> conversations = convRepo.findByUId1OrUId2(id, id);
 		return conversations;
+	}
+	
+	public Optional<Conversation> getConversationById(int id){
+		return convRepo.findById(id);
 	}
 }
