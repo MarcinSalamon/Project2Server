@@ -90,7 +90,7 @@ public class UserController {
 	
 	@GetMapping("/user/{id}/conversation")
 	public ResponseEntity<Iterable<Conversation>> getConversationsByUserId(@PathVariable int id){
-		Iterable<Conversation> conversations = conversationService.getConversationsById(id);
+		Iterable<Conversation> conversations = conversationService.getConversationsByUserId(id);
 		return new ResponseEntity<Iterable<Conversation>>(conversations, HttpStatus.OK);
 	}
 
