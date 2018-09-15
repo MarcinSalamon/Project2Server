@@ -98,6 +98,13 @@ public class MainController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(message);
 	}
 
+	/**
+	 * endpoint
+	 * /conversation/{id}/message
+	 * 
+	 * @param id of conversation from which to get messages
+	 * @return messages from conversation of given id
+	 */
 	@GetMapping("/conversation/{id}/message")
 	public ResponseEntity<Iterable<Message>> getMessagesByConversationId(@PathVariable int id){
 		Iterable<Message> messages = messageService.getMessagesByConversationId(id);

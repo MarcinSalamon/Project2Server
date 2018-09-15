@@ -42,6 +42,12 @@ public class MessageService {
 		return m;
 	}
 
+	/**
+	 * gets all messages by given conversation id
+	 * 
+	 * @param id of the conversation to be retrieved
+	 * @return messages associated with the conversation
+	 */
 	public Iterable<Message> getMessagesByConversationId(int id) {
 		return messageRepo.getByConversationId(id);
 	}
