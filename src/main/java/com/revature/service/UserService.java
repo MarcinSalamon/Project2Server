@@ -22,15 +22,16 @@ public class UserService {
 	 */
 	@Autowired
 	UserRepo userRepo;
-	
+
 	/**
 	 * retrieves a List of all users from the database
+	 * 
 	 * @return
 	 */
 	public List<User> retrieveAllUsers() {
 		return (List<User>) userRepo.findAll();
 	}
-	
+
 	/**
 	 * retrieves a user by id
 	 * 
@@ -45,14 +46,21 @@ public class UserService {
 	/**
 	 * updates user with values of the new user
 	 * 
-	 * @param uId user id
+	 * @param uId  user id
 	 * @param user information of user to be persisted
 	 */
-	public void updateUser(int uId, User user) {
-		user.setPassword(this.hash(user.getPassword()));
+	public void updateUser(User user) {
+		System.out.println(user);
+		User dbUser = getUser(user.getuId()).get();
+		String userPw = user.getPassword();
+		if (userPw != null && dbUser.getPassword()!=userPw) {
+			user.setPassword(this.hash(userPw));
+		} else {
+			user.setPassword(dbUser.getPassword());
+		}
 		userRepo.save(user);
 	}
-	
+
 	/**
 	 * Hashes the password and inserts user into the database
 	 * 
@@ -64,7 +72,7 @@ public class UserService {
 		userRepo.save(user);
 		return user;
 	}
-	
+
 	/**
 	 * validates if the username and password are matching a user in the database
 	 * 
@@ -73,9 +81,12 @@ public class UserService {
 	 */
 	public User validateUser(LoginInfo info) {
 		List<User> users = this.retrieveAllUsers();
+		String hashed = this.hash(info.getPassword());
 		for (User user : users) {
-			if (user.getUsername().equals(info.getUsername()) && this.hash(info.getPassword()).equals(user.getPassword())) {
-				return user;
+			if (user.getUsername().equals(info.getUsername())) {
+				if (hashed.equals(user.getPassword())) {
+					return user;
+				}
 			}
 		}
 		return null;
