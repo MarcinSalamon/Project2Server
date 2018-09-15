@@ -16,6 +16,8 @@ public class FriendsService {
 	@Autowired
 	FriendsRepo friendsRepo;
 	
+	@Autowired
+	UserService userService;
 	
 	/**
 	 * takes in a user id, and returns all the friends of that user
@@ -33,4 +35,5 @@ public class FriendsService {
 		
 		return friends;
 	}
+	
 }
