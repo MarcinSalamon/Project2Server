@@ -77,6 +77,7 @@ public class MainController {
 	 */
 	@PostMapping("/user")
 	public ResponseEntity<Object> register(@RequestBody User registrationInfo){
+		System.out.println(registrationInfo);
 		userService.createUser(registrationInfo);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 	}
@@ -125,7 +126,7 @@ public class MainController {
 	}
 	
 	@ExceptionHandler
-	public Object handleExceptions() {
-		return HttpStatus.BAD_REQUEST;
+	public ResponseEntity<Object> handleExceptions(Exception e) {
+		return ResponseEntity.badRequest().body(null);
 	}
 }
