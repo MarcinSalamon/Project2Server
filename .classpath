@@ -30,5 +30,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="jar/ojdbc7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/marci/my_git_repos/Project2Server/jar/log4j-1.2.12.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
