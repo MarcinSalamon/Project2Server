@@ -96,6 +96,7 @@ public class MainController {
 	 */
 	@PostMapping("/user")
 	public ResponseEntity<Object> register(@RequestBody User registrationInfo){
+		System.out.println(registrationInfo);
 		userService.createUser(registrationInfo);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 	}
@@ -115,6 +116,20 @@ public class MainController {
 		}
 		messageService.createMessage(message);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(message);
+	}
+
+	/**
+	 * endpoint
+	 * /conversation/{id}/message
+	 * 
+	 * @param id of conversation from which to get messages
+	 * @return messages from conversation of given id
+	 */
+	@GetMapping("/conversation/{id}/message")
+	public ResponseEntity<Iterable<Message>> getMessagesByConversationId(@PathVariable int id){
+		Iterable<Message> messages = messageService.getMessagesByConversationId(id);
+		return new ResponseEntity<Iterable<Message>>(messages, HttpStatus.FOUND);
+		
 	}
 	
 	/**
@@ -144,7 +159,7 @@ public class MainController {
 	}
 	
 	@ExceptionHandler
-	public Object handleExceptions() {
-		return HttpStatus.BAD_REQUEST;
+	public ResponseEntity<Object> handleExceptions(Exception e) {
+		return ResponseEntity.badRequest().body(null);
 	}
 }
