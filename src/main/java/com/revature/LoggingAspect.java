@@ -12,11 +12,12 @@ import org.springframework.context.annotation.Configuration;
 public class LoggingAspect {
 	
 	private Logger logger = Logger.getLogger(this.getClass());
-	
 
+	static {
+		System.setProperty("my.log", "C:/logs/spring.log");
+	}
 	@Before("execution(* com.revature.*.*(..))")
 	public void before(JoinPoint joinPoint){
-		
 		logger.info(joinPoint);
 	}
 
