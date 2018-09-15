@@ -41,4 +41,8 @@ public class MessageService {
 		messageRepo.save(m);
 		return m;
 	}
+
+	public Iterable<Message> getMessagesByConversationId(int id) {
+		return messageRepo.getByConversationId(id);
+	}
 }

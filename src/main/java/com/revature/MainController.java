@@ -97,6 +97,13 @@ public class MainController {
 		messageService.createMessage(message);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(message);
 	}
+
+	@GetMapping("/conversation/{id}/message")
+	public ResponseEntity<Iterable<Message>> getMessagesByConversationId(@PathVariable int id){
+		Iterable<Message> messages = messageService.getMessagesByConversationId(id);
+		return new ResponseEntity<Iterable<Message>>(messages, HttpStatus.FOUND);
+		
+	}
 	
 	/**
 	 * endpoint
