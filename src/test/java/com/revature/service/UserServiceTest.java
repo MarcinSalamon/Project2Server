@@ -22,7 +22,7 @@ import com.revature.repository.UserRepo;
 
 //using it to mock object
 @RunWith(MockitoJUnitRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.NONE)
+@SpringBootTest()
 class UserServiceTest {
 
 	@Mock
