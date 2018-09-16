@@ -52,8 +52,9 @@ public class MainController {
 	
 	/**
 	 * local endpoint
-	 * http://localhost:8080/login
+	 * /login
 	 * 
+	 * sets status to a logged in user to 1
 	 * @param info is json with login and password fields
 	 * @return user if username and password are correct
 	 */
@@ -65,7 +66,25 @@ public class MainController {
 		if(validated == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
 		}
+		System.out.println(validated);
+		if(validated.getOnlineStatus()==2) {
+			validated.setOnlineStatus(1);
+			userService.updateUser(validated);
+		}
 		return ResponseEntity.ok(validated);
+	}
+	/**
+	 * /logout
+	 * 
+	 * sets status of a logged in user to 2
+	 * @param logoutUser user to logout
+	 * @return 202 if Accepted
+	 */
+	@PostMapping("/logout")
+	public ResponseEntity<Object> logout(@RequestBody User logoutUser){
+		logoutUser.setOnlineStatus(2);
+		userService.updateUser(logoutUser);
+		return new ResponseEntity<Object>(HttpStatus.ACCEPTED);
 	}
 	
 	/**
@@ -77,6 +96,7 @@ public class MainController {
 	 */
 	@PostMapping("/user")
 	public ResponseEntity<Object> register(@RequestBody User registrationInfo){
+		System.out.println(registrationInfo);
 		userService.createUser(registrationInfo);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 	}
@@ -96,6 +116,20 @@ public class MainController {
 		}
 		messageService.createMessage(message);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(message);
+	}
+
+	/**
+	 * endpoint
+	 * /conversation/{id}/message
+	 * 
+	 * @param id of conversation from which to get messages
+	 * @return messages from conversation of given id
+	 */
+	@GetMapping("/conversation/{id}/message")
+	public ResponseEntity<Iterable<Message>> getMessagesByConversationId(@PathVariable int id){
+		Iterable<Message> messages = messageService.getMessagesByConversationId(id);
+		return new ResponseEntity<Iterable<Message>>(messages, HttpStatus.FOUND);
+		
 	}
 	
 	/**
@@ -125,7 +159,7 @@ public class MainController {
 	}
 	
 	@ExceptionHandler
-	public Object handleExceptions() {
-		return HttpStatus.BAD_REQUEST;
+	public ResponseEntity<Object> handleExceptions(Exception e) {
+		return ResponseEntity.badRequest().body(null);
 	}
 }
