@@ -128,7 +128,7 @@ public class MainController {
 	@GetMapping("/conversation/{id}/message")
 	public ResponseEntity<Iterable<Message>> getMessagesByConversationId(@PathVariable int id){
 		List<Message> messages = (List<Message>) messageService.getMessagesByConversationId(id);
-		return new ResponseEntity<Iterable<Message>>(messages, HttpStatus.FOUND);
+		return new ResponseEntity<Iterable<Message>>(messages, HttpStatus.OK);
 		
 	}
 	
