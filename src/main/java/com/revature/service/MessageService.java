@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.revature.beans.Message;
 import com.revature.repository.MessageRepo;
+import com.revature.util.MessageSort;
 
 /*
  * Here is our service to Messages
@@ -49,6 +52,8 @@ public class MessageService {
 	 * @return messages associated with the conversation
 	 */
 	public Iterable<Message> getMessagesByConversationId(int id) {
-		return messageRepo.getByConversationId(id);
+		List<Message> messages = (List<Message>) messageRepo.getByConversationId(id);
+		Collections.sort(messages, new MessageSort());
+		return messages;
 	}
 }

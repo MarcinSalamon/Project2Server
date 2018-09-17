@@ -8,5 +8,5 @@ import com.revature.beans.Message;
 public interface MessageRepo extends CrudRepository<Message, Integer>{
 
 	Iterable<Message> getByConversationId(int id);
-
+	
 }
